@@ -80,6 +80,7 @@
             this.comboBox.Size = new System.Drawing.Size(268, 28);
             this.comboBox.TabIndex = 4;
             this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox.DropDownClosed += new System.EventHandler(this.comboBox_DropDownClosed);
             // 
             // TxtNote1
             // 

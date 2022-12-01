@@ -48,7 +48,7 @@ namespace WinFormsApp1
 
             BtnCancel.Enabled = false;
             BtnDelete.Enabled = false;
-            BtnInsert.Enabled = false;
+            BtnInsert.Enabled = true;
             BtnSave.Enabled = false;
             BtnDelete.Enabled = false;
             BtnUpdate.Enabled = false;
@@ -78,18 +78,37 @@ namespace WinFormsApp1
 
         }
 
+        private Boolean checkSelectedItem(string s)
+        {
+            foreach (var item in comboBox.Items)
+            {
+                if (item.Equals(s))
+                    return false;
+            }
+            return true;
+        }
         private void Insert()
         {
             this.Text = "Insertion";
             TxtNote1.Text = "";
-
-            comboBox.Enabled = false;
-            TxtNote1.Enabled = true;
-            BtnCancel.Enabled = true;
-            BtnSave.Enabled = true;
-            BtnDelete.Enabled = false;
-            BtnInsert.Enabled = false;
-            BtnUpdate.Enabled = false;
+            if (comboBox.Text == "" )
+            {
+                BtnCancel.Enabled = true;
+                BtnDelete.Enabled = false;
+                BtnInsert.Enabled = false;
+                BtnSave.Enabled = false;
+                BtnDelete.Enabled = false;
+                BtnUpdate.Enabled = false;
+            }
+            else { 
+                comboBox.Enabled = false;
+                TxtNote1.Enabled = true;
+                BtnCancel.Enabled = true;
+                BtnSave.Enabled = true;
+                BtnDelete.Enabled = false;
+                BtnInsert.Enabled = false;
+                BtnUpdate.Enabled = false;
+            }
         }
 
         private void Uppdate()
@@ -163,7 +182,7 @@ namespace WinFormsApp1
                     cmd.Connection = conx;
                     cmd.CommandText = "delete from etudiant where CNE = '" + comboBox.Text + "';";
                     cmd.ExecuteNonQuery();
-                    conx.Close();
+                    conx.Close(); 
                     MessageBox.Show("Seccessfully Deleted");
                     ComoboxFill();
                     Selection();
@@ -174,7 +193,7 @@ namespace WinFormsApp1
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             Selection();
-            TxtNote1.Text= comboBox.Text;
+            TxtNote1.Text= "";
         }
 
         private void BtnInsert_Click(object sender, EventArgs e)
@@ -197,6 +216,16 @@ namespace WinFormsApp1
                 Selection();
 
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void comboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            
         }
     }
 }
